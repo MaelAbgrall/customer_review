@@ -1,0 +1,13 @@
+
+# environment files
+env/
+devEnv/
+
+# data
+dataset
+
+# IDE files
+.vscode
+
+# python generated files
+**/__pycache__/
