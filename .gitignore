@@ -1,10 +1,9 @@
 
 # environment files
-env/
-devEnv/
+env*/
 
 # data
-dataset
+dataset*
 
 # IDE files
 .vscode
