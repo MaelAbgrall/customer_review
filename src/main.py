@@ -1,6 +1,6 @@
 # project files
 import utils.fileHandler as fileHandler
-import utils.dataset_utils as dataUtils
+import utils.dataUtils as dataUtils
 
 #fileHandler.convert_to_npy("../dataset")
 
