@@ -75,18 +75,6 @@ def open_files(root, files):
     return file_list
 
 
-def convert_to_npy(path):
-    """convert the IMDB dataset to a numpy binary file (faster load)
-
-    Arguments:
-        path {string} -- path the the root folder
-    """
-    dataset = import_dataset("../dataset", "train")
-    save_np_array("../dataset/train", dataset)
-    dataset = import_dataset("../dataset", "test")
-    save_np_array("../dataset/test", dataset)
-
-
 def save_np_array(path, array):
     """save the numpy array to a binary file
 
