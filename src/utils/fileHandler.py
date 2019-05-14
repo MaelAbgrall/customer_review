@@ -8,35 +8,36 @@ import numpy
 import utils.progressBar as progressBar
 
 
-def import_dataset(path):
+def import_dataset(path, set_type):
     """import the imdb movie review dataset
 
     Arguments:
         path {string} -- path to the dataset
+        type {string} -- type of the dataset to import ("test" or "train")
 
     Returns:
-        train_set, test_set -- numpy arrays of shape (nb_sample, 2) type: [text, label]
+        dataset -- numpy array of shape (nb_sample, 2) type: [text, label]
     """
-    train_list = []
-    test_list = []
+    dataset = []
 
-    for root, dir, files in os.walk(path):
+    for root, _, files in os.walk(path):
 
         # train set
         if "/train/pos" in root or "/train/neg" in root:
-            print("\n" + root)
-            train_list.extend(open_files(root, files))
+            if set_type == "train":
+                print("\n" + root)
+                dataset.extend(open_files(root, files))
 
         # test set
         if "/test/pos" in root or "/test/neg" in root:
-            print("\n" + root)
-            test_list.extend(open_files(root, files))
+            if set_type == "test":
+                print("\n" + root)
+                dataset.extend(open_files(root, files))
 
     #data_type = numpy.dtype('string,int')
 
-    train_set = numpy.array(train_list)
-    test_set = numpy.array(test_list)
-    return (train_set, test_set)
+    dataset = numpy.array(dataset)
+    return dataset
 
 
 def open_files(root, files):
@@ -72,3 +73,38 @@ def open_files(root, files):
 
         pos += 1
     return file_list
+
+
+def convert_to_npy(path):
+    """convert the IMDB dataset to a numpy binary file (faster load)
+
+    Arguments:
+        path {string} -- path the the root folder
+    """
+    dataset = import_dataset("../dataset", "train")
+    save_np_array("../dataset/train", dataset)
+    dataset = import_dataset("../dataset", "test")
+    save_np_array("../dataset/test", dataset)
+
+
+def save_np_array(path, array):
+    """save the numpy array to a binary file
+
+    Arguments:
+        path {string} -- path to the file to save
+        array {numpy.array} -- numpy array
+    """
+    numpy.save(path, array)
+
+
+def load_np_array(path):
+    """load a numpy array from a npy file
+
+    Arguments:
+        path {string} -- path the the file.npy
+
+    Returns:
+        [type] -- [description]
+    """
+    array = numpy.load(path)
+    return array

@@ -2,4 +2,4 @@
 import utils.fileHandler as fileHandler
 
 
-fileHandler.import_dataset("../dataset")
+fileHandler.convert_to_npy("../dataset")
