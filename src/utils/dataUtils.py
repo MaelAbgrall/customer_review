@@ -1,14 +1,14 @@
-# python integrated
-import re
-
 # dependencies
 import sklearn
 import numpy
-from bs4 import BeautifulSoup
-import nltk
 
 # project
 import utils.progressBar as progressBar
+import utils.textPreprocessing as textPreprocessing
+
+
+# source: https://www.kaggle.com/c/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words
+
 
 
 def shuffle_set(array):
@@ -24,7 +24,7 @@ def shuffle_set(array):
     return array
 
 
-def three_split(array, percentage):
+def three_split(array, percentage, debug=False):
     """separate the dataset in two subset (train and validation) using the percentage
 
     Arguments:
@@ -41,12 +41,12 @@ def three_split(array, percentage):
     validation_list = []
     for position in range(size):
         # visual feedback
-        progressBar.progressBar(position, size)
+        if(debug): progressBar.progressBar(position, size)
         # train data
         if(position < split):
             train_list.append(array[position])
         # validation data
-        if(position > split):
+        if(position >= split):
             validation_list.append(array[position])
 
     train_array = numpy.array(train_list)
@@ -55,20 +55,19 @@ def three_split(array, percentage):
     return train_array, validation_array
 
 
-def clean_array(array, rm_stopwords=True):
-    """clean the text of an array
+def clean_array(array, clean_pattern={"lowercasing":True, "stopword":False, "stemming":False}, debug=False):
+    """clean an array
     
     Arguments:
-        array {numpy.array} -- numpy array of texts (text, label)
+        array {numpy.array} -- numpy array of type (text, label)
     
     Keyword Arguments:
-        rm_stopwords {bool} -- should the clean function remove the stopwords? (default: {True})
+        clean_pattern {dict} -- preprocessing techniques to use. See :func:`~utils.dataUtils.clean_text` for dict parameters (default: {{"lowercasing":True, "stopword":False, "stemming":False}})
+        debug {bool} -- show loading bar (default: {False})
     
     Returns:
         numpy.array -- cleaned array
     """
-    # download the stopwords library
-    nltk.download('stopwords')
 
     print("cleaning the text files. Remove stopwords: " + str(rm_stopwords))
 
@@ -76,10 +75,10 @@ def clean_array(array, rm_stopwords=True):
     size = array.shape[0]
     for position in range(size):
         # visual feedback
-        progressBar.progressBar(position, size)
+        if(debug): progressBar.progressBar(position, size)
         # extract from DS and clean
         text = array[position, 0]
-        clean_text(text, rm_stopwords)
+        clean_text(text, clean_pattern)
         # put back the text in the DS
         array[position, 0] = text
     # end of for loop
@@ -87,36 +86,39 @@ def clean_array(array, rm_stopwords=True):
     return array
 
 
-def clean_text(text, rm_stopwords=True):
-    """clean a text
-
+def clean_text(text, clean_pattern={"lowercasing":True, "stopword":False, "stemming":False}):
+    """clean a string using clean_pattern parameters. this function will always call :func:`~utils.textPreprocessing.noise_removal`
+    
     Arguments:
-        text {string} -- text to clean
-        rm_stopwords {boolean} -- should the clean function remove stopwords?
-
+        text {string} -- a text to clean
+    
+    Keyword Arguments:
+        clean_pattern {dict} -- the preprocessing techniques to use. "lowercasing":"F"/"T"/"intelligent" use lowercasing or intelligent lowercasing. See :func:`~utils.textPreprocessing.lowercasing` for more details (default: {{"lowercasing":True, "stopword":False, "stemming":False}})
+    
     Returns:
-        text -- cleaned text as a string
+        string -- cleaned text
     """
-    # source: https://www.kaggle.com/c/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words
-    # Remove HTML
-    text = BeautifulSoup(text, "html.parser").get_text()
 
-    # Remove non-letters
-    text = re.sub("[^a-zA-Z]", " ", text)
+    # denoising + split in list of string
+    word_list = textPreprocessing.noise_removal(text)
 
-    if rm_stopwords == True:
-        # Convert to lower case, split into individual words
-        word_list = text.lower().split()
+    # lowercase
+    if(clean_pattern["lowercasing"] == "T"):
+        word_list = textPreprocessing.lowercasing(word_list)
 
-        # In Python, searching a set is much faster than searching
-        #   a list, so convert the stop words to a set
-        stops = set(nltk.corpus.stopwords.words("english"))
+    if(clean_pattern["lowercasing"] == "intelligent"):
+        word_list = textPreprocessing.lowercasing(word_list, intelligent=True)
+    
+    # stopwords removal
+    if(clean_pattern["stopword"] == True):
+        word_list = textPreprocessing.stopWord_removal(word_list)
+    
+    # stemming
+    if(clean_pattern["stemming"] == True):
+        word_list = textPreprocessing.stemming(word_list)
+        
 
-        # Remove stop words
-        word_list = [w for w in word_list if not w in stops]
-
-        # Join the words back into one string separated by space,
-        text = " ".join(word_list)
-    # end of stopwords block
+    # Join the words back into one string separated by space,
+    text = " ".join(word_list)"""
 
     return text

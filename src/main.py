@@ -15,8 +15,10 @@ def convert_clean(path):
 
 #fileHandler.convert_to_npy("../dataset")
 
-trainset = fileHandler.load_np_array("../dataset/train.npy")
+#trainset = fileHandler.load_np_array("../dataset/train.npy")
 #trainset = dataUtils.shuffle_set(trainset)
 #train, validation = dataUtils.three_split(trainset, 0.75)
 
-dataUtils.clean_array(trainset, True)
+#dataUtils.clean_array(trainset, True)
+
+import ipdb; ipdb.set_trace()
