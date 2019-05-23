@@ -85,6 +85,12 @@ def noise_removal(text):
     # Remove non-letters
     text = re.sub("[^a-zA-Z]", " ", text)
 
+    # remove letters that are used more than three times in a row
+    # sources: https://en.oxforddictionaries.com/explore/words-with-same-letter-three-times-in-a-row/
+    # https://stackoverflow.com/questions/4574509/remove-duplicate-chars-using-regex
+    text = re.sub(r'([\w])\1{2,}', r'\1', text)
+
+
     word_list = text.split()
     return word_list
 
@@ -100,3 +106,4 @@ def stopWord_removal(list_of_words):
     """
     curated_list = [w for w in list_of_words if not w in STOP_WORDS]
     return curated_list
+

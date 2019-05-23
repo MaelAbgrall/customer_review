@@ -1,5 +1,6 @@
 # python modules
 import os
+import pickle
 
 # dependencies
 import numpy
@@ -34,13 +35,11 @@ def import_dataset(path, set_type):
                 print("\n" + root)
                 dataset.extend(open_files(root, files))
 
-    #data_type = numpy.dtype('string,int')
-
     dataset = numpy.array(dataset)
     return dataset
 
 
-def open_files(root, files):
+def open_files(root, files, debug=False):
     """open the file list output from os.walk()
 
     Arguments:
@@ -65,13 +64,14 @@ def open_files(root, files):
     # opening files
     for file_path in files:
         # progress
-        progressBar.progressBar(pos, nb_Files)
+        if(debug):progressBar.progressBar(pos, nb_Files)
 
         with open(root + "/" + file_path) as f:
             text = f.read()
             file_list.append((text, sentiment))
 
         pos += 1
+    if(debug):print("\n")
     return file_list
 
 
@@ -96,3 +96,19 @@ def load_np_array(path):
     """
     array = numpy.load(path)
     return array
+
+
+def save_pickle(object_to_dump, path):
+    """dump to a file a python object using pickle
+    
+    Arguments:
+        object_to_dump {object} -- python object
+        path {string} -- path to the file to open, do not add .pickle at the end
+    """
+    pickle.dump(object_to_dump, open(path + ".pickle", "wb"))
+
+
+def load_pickle(path):
+    print("not working")
+    exit()
+    #return pickled_object

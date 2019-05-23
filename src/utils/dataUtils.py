@@ -69,7 +69,7 @@ def clean_array(array, clean_pattern={"lowercasing":True, "stopword":False, "ste
         numpy.array -- cleaned array
     """
 
-    print("cleaning the text files. Remove stopwords: " + str(rm_stopwords))
+    print("cleaning the text files. Clean pattern: " + str(clean_pattern))
 
     # loop through the array
     size = array.shape[0]
@@ -78,11 +78,11 @@ def clean_array(array, clean_pattern={"lowercasing":True, "stopword":False, "ste
         if(debug): progressBar.progressBar(position, size)
         # extract from DS and clean
         text = array[position, 0]
-        clean_text(text, clean_pattern)
+        text = clean_text(text, clean_pattern)
         # put back the text in the DS
         array[position, 0] = text
     # end of for loop
-
+    if(debug): print("\n")
     return array
 
 
@@ -119,6 +119,6 @@ def clean_text(text, clean_pattern={"lowercasing":True, "stopword":False, "stemm
         
 
     # Join the words back into one string separated by space,
-    text = " ".join(word_list)"""
+    text = " ".join(word_list)
 
     return text
