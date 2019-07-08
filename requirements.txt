@@ -2,3 +2,4 @@ numpy
 sklearn
 beautifulsoup4
 nltk
+gensim

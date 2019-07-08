@@ -10,6 +10,7 @@ the project uses the following dependencies:
 - **sklearn**: machine learning library, used also to shuffle data easily
 - **Beautiful Soup**: Data cleaner from html/xml files (more powerful than RegEx)
 - **NLTK**: Data cleaning (stop words list)
+- **Gensim**: word embedding models (word2vec)
 
 ## Development dependencies
 

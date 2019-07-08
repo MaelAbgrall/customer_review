@@ -14,7 +14,14 @@ class bagOfWord():
     
     # type: term frequency or TFIDF
     def __init__(self, model_type, path=None):
-        self.model_type = model_type
+        """create a bag of word model
+        
+        Arguments:
+            model_type {string} -- what kind of bag of word (TF for term frequency, TFIDF for TF-IFDF)
+        
+        Keyword Arguments:
+            path {string} -- path to a model saved in a picle format (default: {None})
+        """
         
         # create a TF model
         if(path is None and model_type == "TF"):

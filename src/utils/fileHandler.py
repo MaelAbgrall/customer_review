@@ -109,6 +109,12 @@ def save_pickle(object_to_dump, path):
 
 
 def load_pickle(path):
-    print("not working")
-    exit()
-    #return pickled_object
+    """load a pickle object
+    
+    Arguments:
+        path {string} -- path to the pickle object
+    
+    Returns:
+        object -- the pickled object
+    """
+    return pickle.load(path)

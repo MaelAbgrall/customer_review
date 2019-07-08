@@ -122,3 +122,30 @@ def clean_text(text, clean_pattern={"lowercasing":True, "stopword":False, "stemm
     text = " ".join(word_list)
 
     return text
+
+def split_text(array):
+    """split the string in the array
+    
+    Arguments:
+        array {numpy.array} -- numpy array of type (texts, label)
+    
+    Returns:
+        numpy.array -- an array of type (list of words in a text, label)
+    """
+    new_array = []
+    print("splitting text into lists")
+    # loop through the array
+    size = array.shape[0]
+    for position in range(size):
+        # visual feedback
+        progressBar.progressBar(position, size)
+        # extract from DS and split
+        text = array[position, 0]
+        split_text = text.split()
+        # put back the text in the DS
+        new_array.append([split_text, array[position, 1]])
+    # end of for loop
+    print("\nconverting list to numpy array")
+    array = numpy.array(new_array)
+    print("split_text done...\n")
+    return array
