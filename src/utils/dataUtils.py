@@ -55,7 +55,7 @@ def three_split(array, percentage, debug=False):
     return train_array, validation_array
 
 
-def clean_array(array, clean_pattern={"lowercasing":True, "stopword":False, "stemming":False}, debug=False):
+def clean_array(array, clean_pattern={"lowercasing":"T", "stopword":False, "stemming":False}, debug=False):
     """clean an array
     
     Arguments:
@@ -86,7 +86,7 @@ def clean_array(array, clean_pattern={"lowercasing":True, "stopword":False, "ste
     return array
 
 
-def clean_text(text, clean_pattern={"lowercasing":True, "stopword":False, "stemming":False}):
+def clean_text(text, clean_pattern={"lowercasing":"T", "stopword":False, "stemming":False}):
     """clean a string using clean_pattern parameters. this function will always call :func:`~utils.textPreprocessing.noise_removal`
     
     Arguments:

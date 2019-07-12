@@ -31,9 +31,6 @@ class wordEmbedding ():
             text_array, total_examples=text_array.shape[0], epochs=10)
         print("done...\n")
 
-    def process(self, text_array):
-        pass
-
     def get_vector(self, word):
         return self.model[word]
 
@@ -62,9 +59,11 @@ class wordEmbedding ():
         total_vector = numpy.divide(total_vector, len(review))
         return total_vector
 
-    def process_average(self, texts_array):
+    def process(self, texts_array, debug=False):
         """Given a set of reviews (each one a list of words), calculate
-        the average feature vector for each one and return a numpy array"""
+        the average feature vector for each one and return a numpy array
+        """
+        
         print("processing reviews using average")
         processed_texts = []
         # get the array size
@@ -73,12 +72,11 @@ class wordEmbedding ():
         # Loop through the reviews
         for position in range(size):
             # visual feedback
-            progressBar.progressBar(position, size)
+            if(debug): progressBar.progressBar(position, size)
         
-            review = texts_array[position]
-            
             # Call the function (defined above) that makes average feature vectors
-            processed_texts.append((self.average_review(review[0]), review[1]))
+            review = texts_array[position]
+            processed_texts.append(self.average_review(review))
 
         processed_texts = numpy.array(processed_texts)
         print("\nprocessing done...\n")

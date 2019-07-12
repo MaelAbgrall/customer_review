@@ -49,7 +49,7 @@ class bagOfWord():
         """transform an array of texts using the model specified (TF or TFIDF)
         
         Arguments:
-            texts_array {numpy.array} -- array of texts
+            texts_array {numpy.array} -- array of texts (no labels)
         
         Returns:
             numpy.array -- result array

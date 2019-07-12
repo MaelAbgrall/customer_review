@@ -4,6 +4,7 @@ import pickle
 
 # dependencies
 import numpy
+import pandas
 
 # project
 import utils.progressBar as progressBar
@@ -37,7 +38,6 @@ def import_dataset(path, set_type):
 
     dataset = numpy.array(dataset)
     return dataset
-
 
 def open_files(root, files, debug=False):
     """open the file list output from os.walk()
@@ -118,3 +118,30 @@ def load_pickle(path):
         object -- the pickled object
     """
     return pickle.load(path)
+
+
+def save_toCSV(path, array):
+    """save a numpy array to a csv file using pandas
+    
+    Arguments:
+        path {string} -- path to the file including .csv
+        array {numpy.ndarray} -- numpy array
+    """
+    dataFrame = pandas.DataFrame({'text':array[:, 0], 'label':array[:, 1]})
+    dataFrame.to_csv(path)
+
+
+def load_fromCSV(path):
+    """load a csv file and return a numpy array
+    
+    Arguments:
+        path {string} -- path to the csv file, including.csv
+    
+    Returns:
+        numpy.ndarray -- numpy array
+    """
+    dataFrame = pandas.read_csv(path)
+    array = dataFrame.to_numpy()
+    # removing the line number
+    array = array[:, 1:]
+    return array
