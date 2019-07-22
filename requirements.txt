@@ -4,3 +4,4 @@ beautifulsoup4
 nltk
 gensim
 pandas
+keras

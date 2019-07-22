@@ -1,6 +1,9 @@
 """ This script will convert the IMDB dataset into a numpy file (for faster load)
         and clean it using all possible pattern combination
 """
+import nltk
+nltk.download('wordnet')
+nltk.download('stopwords')
 
 #############
 #  Imports  #

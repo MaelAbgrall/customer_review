@@ -5,12 +5,9 @@ import re
 from bs4 import BeautifulSoup
 import nltk
 
-nltk.download('wordnet')
-
 #SOURCE: https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html
 
 # download the stopwords library & convert to set (faster than lists)
-nltk.download('stopwords')
 STOP_WORDS = set(nltk.corpus.stopwords.words("english"))
 
 STEMMER = nltk.stem.PorterStemmer()
