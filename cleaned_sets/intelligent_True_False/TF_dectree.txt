@@ -1,0 +1,4 @@
+Word model: TF
+Learning model: dectree
+Scores: [0.7172 0.7216 0.7228 0.7328 0.7216 0.72   0.714  0.722  0.734  0.7264]
+Mean: 0.72324  Standard deviation: 0.005971800398539803

@@ -1,0 +1,4 @@
+Word model: w2v
+Learning model: logreg
+Scores: [0.856  0.8624 0.8652 0.8436 0.8544 0.852  0.8636 0.856  0.8564 0.8724]
+Mean: 0.8582000000000001  Standard deviation: 0.007592101158440913

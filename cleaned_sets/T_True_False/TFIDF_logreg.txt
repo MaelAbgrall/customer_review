@@ -1,0 +1,4 @@
+Word model: TFIDF
+Learning model: logreg
+Scores: [0.8924 0.8948 0.8764 0.908  0.8944 0.8916 0.8896 0.896  0.8848 0.9   ]
+Mean: 0.8928  Standard deviation: 0.008027951170753363

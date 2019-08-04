@@ -1,0 +1,4 @@
+Word model: w2v
+Learning model: dectree
+Scores: [0.7288 0.7292 0.722  0.7188 0.7108 0.7192 0.73   0.7176 0.7256 0.7316]
+Mean: 0.72336  Standard deviation: 0.006415481275789062

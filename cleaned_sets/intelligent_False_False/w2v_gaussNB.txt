@@ -1,0 +1,4 @@
+Word model: w2v
+Learning model: gaussNB
+Scores: [0.6704 0.6944 0.6876 0.6864 0.6948 0.6836 0.708  0.6796 0.6884 0.6872]
+Mean: 0.68804  Standard deviation: 0.009436016108506804

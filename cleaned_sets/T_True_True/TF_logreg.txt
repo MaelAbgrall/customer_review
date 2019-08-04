@@ -1,0 +1,4 @@
+Word model: TF
+Learning model: logreg
+Scores: [0.8772 0.8728 0.866  0.864  0.872  0.8708 0.868  0.8856 0.8828 0.8676]
+Mean: 0.8726799999999999  Standard deviation: 0.006793055277266642

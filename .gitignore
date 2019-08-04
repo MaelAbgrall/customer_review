@@ -10,3 +10,6 @@ dataset*
 
 # python generated files
 **/__pycache__/
+
+# logs
+nohup.out

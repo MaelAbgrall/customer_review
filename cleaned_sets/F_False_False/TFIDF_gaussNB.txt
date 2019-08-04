@@ -1,0 +1,4 @@
+Word model: TFIDF
+Learning model: gaussNB
+Scores: [0.6712 0.6672 0.6792 0.6672 0.688  0.648  0.6788 0.6852 0.6672 0.6876]
+Mean: 0.67396  Standard deviation: 0.011743185257842084

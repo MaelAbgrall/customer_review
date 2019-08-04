@@ -1,0 +1,4 @@
+Word model: TFIDF
+Learning model: dectree
+Scores: [0.692  0.6808 0.7088 0.716  0.6944 0.6964 0.7096 0.6936 0.6848 0.6908]
+Mean: 0.69672  Standard deviation: 0.01073133728852095
